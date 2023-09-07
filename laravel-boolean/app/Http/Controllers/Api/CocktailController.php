@@ -10,12 +10,21 @@ class CocktailController extends Controller
 {
     public function index()
         {
-            $cocktails = Cocktail::paginate(5);
+            $cocktails = Cocktail::paginate(10);
 
             return response()->json([
 
                 'success' => true,
                 'results' => $cocktails,
+            ]);
+        }
+
+        public function show(string $slug){
+            $cocktails = Cocktail::findOrFail($slug);
+    
+            return response()->json([
+                'success' => true,
+                'results' => $cocktails
             ]);
         }
 }
